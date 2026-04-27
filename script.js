@@ -70,7 +70,7 @@ function loginUser() {
     let savedEmail = localStorage.getItem("userEmail");
     let savedPass = localStorage.getItem("userPass");
 
-    if (email === savedEmail && pass === savedPass) { 
+    if (email === savedEmail && pass === savedPass) {  
         localStorage.setItem("loggedIn", "true");
         document.getElementById("loginMsg").innerHTML = "Login successful!";
         show("home");
@@ -78,7 +78,7 @@ function loginUser() {
         document.getElementById("loginMsg").innerHTML = "Invalid email or password.";
     }
 }
-
+ 
 function logoutUser() {
     localStorage.removeItem("loggedIn");
     show("login");
