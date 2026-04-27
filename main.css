@@ -6,7 +6,7 @@ body {
 
 /* HEADER */
 header {
-    background: #2596be; /* Teal colour from your image */
+    background: darkcyan; /* Teal colour from your image */
     color: white;
     padding: 12px 25px;
     display: flex;
@@ -42,7 +42,7 @@ nav a {
 }
 
 nav a:hover {
-    background: #2596be;
+    background: darkcyan;
     border-radius: 5px;
 }
 
@@ -116,6 +116,6 @@ th, td {
 }
 
 th {
-    background: #0097A7;
+    background: darkcyan;
     color: white;
 }

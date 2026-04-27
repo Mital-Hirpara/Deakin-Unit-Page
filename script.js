@@ -70,7 +70,7 @@ function loginUser() {
     let savedEmail = localStorage.getItem("userEmail");
     let savedPass = localStorage.getItem("userPass");
 
-    if (email === savedEmail && pass === savedPass) {
+    if (email === savedEmail && pass === savedPass) { 
         localStorage.setItem("loggedIn", "true");
         document.getElementById("loginMsg").innerHTML = "Login successful!";
         show("home");
