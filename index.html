@@ -1,10 +1,417 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title> Home </title>
-<link rel="stylesheet" type="text/css" media="screen" href="main.css"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deakin University Portal</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f6f9;
+}
+
+/* ---------------- HEADER ---------------- */
+header {
+    background: #002f6c;
+    color: white;
+    padding: 12px 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 4px solid #ffcd00;
+}
+
+header .left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+header img {
+    height: 45px;
+}
+
+nav {
+    display: flex;
+    gap: 20px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 6px 10px;
+}
+
+nav a:hover {
+    background: #004a9f;
+    border-radius: 5px;
+}
+
+/* ---------------- PAGE SECTIONS ---------------- */
+.page { display: none; padding: 20px; }
+.active { display: block; }
+
+.hero {
+    background: white;
+    padding: 40px;
+    text-align: center;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.card:hover {
+    background: #e6f0ff;
+}
+
+.info-box {
+    background: white;
+    padding: 15px;
+    margin-top: 10px;
+    border-left: 5px solid #002f6c;
+    display: none;
+}
+
+input {
+    padding: 10px;
+    width: 60%;
+    margin-top: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    background: #002f6c;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background: #004a9f;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    margin-top: 10px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background: #002f6c;
+    color: white;
+}
+</style>
 </head>
+
 <body>
-<h1>SIT223-SIT753 - Professional Practice in IT</h1>
+
+<header>
+    <div class="left">
+        <img src="deakin-logo.png.jpeg" alt="Deakin Logo">
+        <h3>Deakin University</h3>
+    </div>  
+ 
+    <nav>
+        <a onclick="show('login')">Login</a>
+        <a onclick="show('register')">Register</a>
+        <a onclick="logoutUser()">Logout</a>
+
+        <a onclick="show('home')">Home</a>
+        <a onclick="show('news')">News</a>
+        <a onclick="show('programs')">Programs</a>
+        <a onclick="show('student')">Student Portal</a>
+        <a onclick="show('staff')">Staff Portal</a>
+    </nav>
+</header>
+
+<!-- LOGIN PAGE -->
+<div id="login" class="page active">
+    <h2>Login</h2>
+    <input id="loginEmail" type="text" placeholder="Email"><br>
+    <input id="loginPass" type="password" placeholder="Password"><br>
+    <button onclick="loginUser()">Login</button>
+    <p id="loginMsg"></p>
+</div>
+
+<!-- REGISTER PAGE -->
+<div id="register" class="page">
+    <h2>Register</h2>
+    <input id="regName" type="text" placeholder="Full Name"><br>
+    <input id="regEmail" type="text" placeholder="Email"><br>
+    <input id="regPass" type="password" placeholder="Password"><br>
+    <button onclick="registerUser()">Register</button>
+    <p id="regMsg"></p>
+</div>
+
+<!-- HOME -->
+<div id="home" class="page">
+    <div class="hero">
+        <h1>Welcome to Deakin University Portal</h1>
+        <input type="text" placeholder="Search..." onkeyup="searchSite(this.value)">
+        <p id="searchResult"></p>
+    </div>
+
+    <div class="grid">
+        <div class="card" onclick="show('news')">News & Events</div>
+        <div class="card" onclick="show('programs')">Programs</div>
+        <div class="card" onclick="show('student')">Student Portal</div>
+        <div class="card" onclick="show('staff')">Staff Portal</div>
+    </div>
+</div>
+
+<!-- NEWS -->
+<div id="news" class="page">
+    <h2>News & Events</h2>
+    <ul>
+        <li>New semester begins next week</li>
+        <li>AI Research lab inaugurated</li>
+        <li>Sports meet scheduled for July</li>
+        <li>International student orientation ongoing</li>
+    </ul>
+</div>
+
+<!-- PROGRAMS -->
+<div id="programs" class="page">
+    <h2>Programs</h2>
+
+    <h3>Undergraduate (3 Years)</h3>
+    <ul>
+        <li>Bachelor of Computer Science</li>
+        <li>Bachelor of IT</li>
+        <li>Bachelor of Cyber Security</li>
+        <li>Bachelor of Data Science</li>
+    </ul>
+
+    <h3>Postgraduate (2 Years)</h3>
+    <ul>
+        <li>Master of AI</li>
+        <li>Master of Cyber Security</li>
+        <li>Master of Data Analytics</li>
+    </ul>
+
+    <h3>Research (3–4 Years)</h3>
+    <ul>
+        <li>PhD Computer Science</li>
+        <li>PhD AI</li>
+        <li>PhD Data Science</li>
+    </ul>
+</div>
+
+<!-- STUDENT PORTAL -->
+<div id="student" class="page">
+    <h2>Student Portal</h2>
+
+    <div class="grid">
+        <div class="card" onclick="toggleInfo('rec')">Academic Records</div>
+        <div class="card" onclick="toggleInfo('mat')">Course Materials</div>
+        <div class="card" onclick="toggleInfo('att')">Attendance</div>
+        <div class="card" onclick="toggleInfo('exam')">Exam Results</div>
+        <div class="card" onclick="toggleInfo('fee')">Fees & Payments</div>
+        <div class="card" onclick="toggleInfo('pro')">Profile Settings</div>
+    </div>
+
+    <!-- RANDOM INFORMATION BOXES -->
+    <div id="rec" class="info-box">
+        <h3>Academic Records</h3>
+        <p>GPA: 3.42</p>
+        <p>Completed Units: 18</p>
+        <p>Progress: 62%</p>
+    </div>
+
+    <div id="mat" class="info-box">
+        <h3>Course Materials</h3>
+        <ul>
+            <li>SIT102 – Intro to Programming (PDF)</li>
+            <li>SIT210 – Web Development (Slides)</li>
+            <li>SIT232 – Data Structures (Notes)</li>
+        </ul>
+    </div>
+
+    <div id="att" class="info-box">
+        <h3>Attendance</h3>
+        <p>Programming: 92%</p>
+        <p>AI: 88%</p>
+        <p>Cyber Security: 95%</p>
+    </div>
+
+    <div id="exam" class="info-box">
+        <h3>Exam Results</h3>
+        <p>Programming: 78%</p>
+        <p>AI: 84%</p>
+        <p>Data Structures: 69%</p>
+    </div>
+
+    <div id="fee" class="info-box">
+        <h3>Fees & Payments</h3>
+        <p>Outstanding Balance: $1,240</p>
+        <p>Next Due Date: 14 May 2026</p>
+        <p>Payment Status: Pending</p>
+    </div>
+
+    <div id="pro" class="info-box">
+        <h3>Profile Settings</h3>
+        <p>Name: John Student</p>
+        <p>Email: john123@deakin.edu.au</p>
+        <p>Course: Bachelor of IT</p>
+    </div>
+
+    <br><hr><br>
+
+    <button onclick="generateTimetable()">Generate Timetable</button>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Day</th>
+                <th>Time</th>
+                <th>Unit Code</th>
+                <th>Unit Name</th>
+            </tr>
+        </thead>
+        <tbody id="timetable"></tbody>
+    </table>
+
+    <h3>Course Units</h3>
+    <ul id="units"></ul>
+</div>
+
+<!-- STAFF PORTAL -->
+<div id="staff" class="page">
+    <h2>Staff Portal</h2>
+
+    <div class="grid">
+        <div class="card">HR Information</div>
+        <div class="card">Payroll</div>
+        <div class="card">Leave Requests</div>
+        <div class="card">Internal Notices</div>
+        <div class="card">Teaching Schedule</div>
+        <div class="card">Staff Resources</div>
+    </div>
+
+    <p style="margin-top:20px;">
+        Access all staff‑related tools and information in one place.
+    </p>
+</div>
+
+<script>
+function show(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+}
+
+function searchSite(q) {
+    let r = document.getElementById("searchResult");
+    if (!q) { r.innerHTML = ""; return; }
+    r.innerHTML = "Searching for: " + q;
+}
+
+function toggleInfo(id) {
+    document.querySelectorAll('.info-box').forEach(box => box.style.display = "none");
+    document.getElementById(id).style.display = "block";
+}
+
+function randomCode() {
+    return "SIT" + Math.floor(100 + Math.random() * 900);
+}
+
+function generateTimetable() {
+    let days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+    let subjects = ["Programming", "Web Dev", "AI", "Data Structures", "Cyber Security", "Databases"];
+    let tbody = document.getElementById("timetable");
+    let ul = document.getElementById("units");
+
+    tbody.innerHTML = "";
+    ul.innerHTML = "";
+
+    for (let i = 0; i < 5; i++) {
+        let code = randomCode();
+        let subject = subjects[Math.floor(Math.random() * subjects.length)];
+        let time = (9 + i) + ":00 AM";
+
+        tbody.innerHTML += `
+        <tr>
+            <td>${days[i]}</td>
+            <td>${time}</td>
+            <td>${code}</td>
+            <td>${subject}</td>
+        </tr>`;
+
+        ul.innerHTML += `<li>${code} - ${subject}</li>`;
+    }
+}
+
+/* ---------------- LOGIN + REGISTER SYSTEM ---------------- */
+
+function registerUser() {
+    let name = document.getElementById("regName").value;
+    let email = document.getElementById("regEmail").value;
+    let pass = document.getElementById("regPass").value;
+
+    if (!name || !email || !pass) {
+        document.getElementById("regMsg").innerHTML = "All fields required.";
+        return;
+    }
+
+    localStorage.setItem("userName", name);
+    localStorage.setItem("userEmail", email);
+    localStorage.setItem("userPass", pass);
+
+    document.getElementById("regMsg").innerHTML = "Registration successful!";
+}
+
+function loginUser() {
+    let email = document.getElementById("loginEmail").value;
+    let pass = document.getElementById("loginPass").value;
+
+    let savedEmail = localStorage.getItem("userEmail");
+    let savedPass = localStorage.getItem("userPass");
+
+    if (email === savedEmail && pass === savedPass) {
+        localStorage.setItem("loggedIn", "true");
+        document.getElementById("loginMsg").innerHTML = "Login successful!";
+        show("home");
+    } else {
+        document.getElementById("loginMsg").innerHTML = "Invalid email or password.";
+    }
+}
+
+function logoutUser() {
+    localStorage.removeItem("loggedIn");
+    show("login");
+}
+
+/* Hide portal pages if not logged in */
+window.onload = () => {
+    if (localStorage.getItem("loggedIn") === "true") {
+        show("home");
+    } else {
+        show("login");
+    }
+};
+</script>
+
 </body>
 </html>
